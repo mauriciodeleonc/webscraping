@@ -21,31 +21,21 @@
                         <div class="col-md-5 mb-3">
                             <label for="producto">Producto a buscar (solamente una palabra)</label>
                             <input type="text" class="form-control" id="producto" placeholder="Ej. Computadora" name="producto" required>
-                            <div class="valid-feedback">
-                                Se ve bien!
-                            </div>
-                            <div class="invalid-feedback">
-                                Por favor ingrese solo una palabra
-                            </div>
+                            <p id="product-hidden"></p>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col-md-5 mb-3">
                             <label for="cantidad">Cantidad de productos a mostrar</label>
                             <input type="number" class="form-control" id="cantidad" placeholder="Ej. 20" min='1' max='20' name="cant" required>
-                            <div class="valid-feedback">
-                                Se ve bien!
-                            </div>
-                            <div class="invalid-feedback">
-                                Por favor seleccione un número entre 1 y 20
-                            </div>
+                            <p id="cantidad-hidden"></p>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class='col-md-5 mb-3'>
                             <div class="form-check form-check-inline">
                                 <label for="cantidad">Orden</label>
-                                <input class="form-check-input ml-3" type="radio" id="ordenDesc" value="DESC" name="orden" checked>
+                                <input class="form-check-input ml-3" type="radio" id="ordenDesc" value="DESC" name="orden">
                                 <label class="form-check-label mr-3" for="ordenDesc">Precio descendente</label>
 
                                 <input class="form-check-input" type="radio" id="ordenAsc" value="ASC" name="orden">
@@ -74,29 +64,44 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script>
+        let producto = document.getElementById('producto');
+        let cantidad = document.getElementById('cantidad');
         (function() {
             'use strict';
             window.addEventListener('load', function() {
             var forms = document.getElementsByClassName('needs-validation');
             var validation = Array.prototype.filter.call(forms, function(form) {
                 form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false || document.getElementById('producto').value.includes(' ')) {
+                    if (form.checkValidity() === false || producto.value.includes(" ")) {
                         event.preventDefault();
                         event.stopPropagation();
-                        var invalidOptions = document.querySelectorAll(".form-control:invalid");
-                        invalidOptions.forEach(function(element) {
-                            element.parentNode.childNodes.forEach(function(node) {
-                                if (document.getElementById('producto').value.includes(' ')) {
-                                    node.className = 'invalid-feedback';
-                                }
-                            });
-                        });
                     }
-                    form.classList.add('was-validated');
+                    let productoHidden = document.getElementById('product-hidden');
+                    let cantidadHidden = document.getElementById('cantidad-hidden');
+                    if(producto.value.includes(" ")){
+                        producto.style.borderColor = "red";
+                        productoHidden.style.color = 'red';
+                        productoHidden.innerHTML = 'Por favor ingrese solo una palabra'
+                    } else {
+                        producto.style.borderColor = "green";
+                        productoHidden.style.color = 'green';
+                        productoHidden.innerHTML = 'Se ve bien!';
+                    }
+                    if(cantidad.value < 1 || cantidad.value > 20){
+                        cantidad.style.borderColor = "red";
+                        cantidadHidden.style.color = 'red';
+                        cantidadHidden.innerHTML = 'Por favor ingrese un número entre el 1 y 20'
+                    } else {
+                        cantidad.style.borderColor = "green";
+                        cantidadHidden.style.color = 'green';
+                        cantidadHidden.innerHTML = 'Se ve bien!';
+                    }
+                    //form.classList.add('was-validated');
                 }, false);
                 });
             }, false);
         })();
+
     </script>
   </body>
 </html>
