@@ -57,7 +57,7 @@ app.post('/', (req, res) => {
                     <div class='container'>
                         <div class='row' style="padding-top: 20px;">
                             <div class='col'>
-                                <h1>Mi buscador de PCEL</h1>
+                                <h1>Mi buscador de PCEL (De Mauricio y Jonathan)</h1>
                 
                                 <form class="needs-validation" action="http://localhost:3000" method="POST" novalidate>
                                     <div class="form-row">
@@ -112,6 +112,12 @@ app.post('/', (req, res) => {
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <h3>Damos nuestra palabra que hemos trabajado en esta actividad con integirdad académica</h3>
                             </div>
                         </div>
                     </div>
